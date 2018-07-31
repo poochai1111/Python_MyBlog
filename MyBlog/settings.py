@@ -15,14 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-my_app_less = os.path.join(BASE_DIR, 'MyBlog', 'static', 'less')
-
-# For apps outside of your project, it's simpler to import them to find their root folders
-import bootstrap3
-bootstrap_less = os.path.join(os.path.dirname(bootstrap3.__file__), 'static', 'less')
-
-PIPELINE_LESS_ARGUMENTS = u'--include-path={}'.format(os.pathsep.join([bootstrap_less, my_app_less]))
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -56,42 +48,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-PIPELINE_CSS = {
-    'bootstrap': {
-        'source_filenames': (
-            'bootstrap3/less/bootstrap.less',
-        ),
-        'output_filename': 'css/b.css',
-        'extra_context': {
-            'media': 'screen,projection',
-        },
-    },
-}
-
-PIPELINE_COMPILERS = (
-    'pipeline.compilers.less.LessCompiler',
-)
-
-PIPELINE_JS = {
-    'bootstrap': {
-        'source_filenames': (
-          'bootstrap3/js/transition.js',
-          'bootstrap3/js/modal.js',
-          'bootstrap3/js/dropdown.js',
-          'bootstrap3/js/scrollspy.js',
-          'bootstrap3/js/tab.js',
-          'bootstrap3/js/tooltip.js',
-          'bootstrap3/js/popover.js',
-          'bootstrap3/js/alert.js',
-          'bootstrap3/js/button.js',
-          'bootstrap3/js/collapse.js',
-          'bootstrap3/js/carousel.js',
-          'bootstrap3/js/affix.js',
-        ),
-        'output_filename': 'js/b.js',
-    },
-}
 
 ROOT_URLCONF = 'MyBlog.urls'
 
@@ -161,5 +117,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
 STATIC_URL = '/static/'
+
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static/bootstrap3"),
+)
