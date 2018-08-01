@@ -3,17 +3,13 @@
 <head>
     {% load staticfiles %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
-    <script src="{%  static 'bootstrap3/js/bootstrap.min.js' %}"></script>
-    <script src="https://code.jquery.com/jquery.js"></script>
     <link rel="stylesheet" href="{% static 'bootstrap3/css/bootstrap.min.css' %}">
-    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="{%  static 'jquery3/jquery-3.3.1.min.js' %}"></script>
+    <script src="{%  static 'bootstrap3/js/bootstrap.min.js' %}"></script>
     <title>Login</title>
 </head>
 <body>
 <p>My first Blog</p>
-<p>{{ STATIC_URL}}</p>
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">
 	<div class="navbar-header">
