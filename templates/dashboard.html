@@ -4,12 +4,12 @@
     {% load staticfiles %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
     <link rel="stylesheet" href="{% static 'bootstrap3/css/bootstrap.min.css' %}">
-    <script src="{%  static 'jquery3/jquery-3.3.1.min.js' %}"></script>
-    <script src="{%  static 'bootstrap3/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <script src="{% static 'jquery3/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap3/js/bootstrap.min.js' %}"></script>
     <title>Login</title>
 </head>
 <body>
-<p>My first Blog</p>
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">
 	<div class="navbar-header">
@@ -38,5 +38,21 @@
 	</div>
 	</div>
 </nav>
+<form role="form">
+    <div class="form-group">
+        <label for="title">Login Blog</label>
+    </div>
+    <div class="form-group">
+        <label for="name">Name：</label>
+        <input type="text" id="name">
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-default">Register</button>
+</form>
+
 </body>
 </html>

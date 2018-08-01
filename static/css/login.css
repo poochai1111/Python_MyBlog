@@ -1,0 +1,12 @@
+body{
+  font-family: "华文细黑";
+  background:url('../image/Login_Background.jpg') no-repeat;
+  background-size: 100%;
+}
+form{
+    width: 60%;
+    height: 50%;
+    margin-top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+    }
