@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path
 
 from . import view
-
+from TestModel.testdb import test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.default),
-    path('register/',view.register),
+    path('register/', view.register),
+    path('test/', test),
 ]
