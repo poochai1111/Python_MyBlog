@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'bootstrap3/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <script src="{% static 'jquery3/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap3/js/bootstrap.min.js' %}"></script>
+    <title>Register</title>
 </head>
 <body>
 <form class="form-horizontal" role="form">
