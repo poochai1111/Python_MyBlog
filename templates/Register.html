@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
     <script src="{% static 'jquery3/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'bootstrap3/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/register.js' %}"></script>
     <title>Register</title>
 </head>
 <body>
 <div id="register">
-    <form action="/login">
+    <form action="/register" method="get">
         <label class="registerTitle">Register Blog</label><br/>
         <div class="name">
             Name:<input type="text" name="name"><br/><br/>

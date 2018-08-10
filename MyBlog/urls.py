@@ -21,8 +21,8 @@ from TestModel.testdb import test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', view.default),
     path('', view.default),
+    path('login/', view.login),
     path('register/', view.register),
     path('test/', test),
 ]
