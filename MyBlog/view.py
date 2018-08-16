@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response
-from MyBlog.util import dbUtil
+from MyBlog.models import User
+import datetime
 
 
 def default(request):
@@ -8,34 +9,32 @@ def default(request):
 
 def login(request):
     request.encoding = 'utf-8'
-    dic = {}
-    name = request.GET['name'].encode('utf-8')
-    if name is None or len(name) < 2:
+    if 'register' in request.GET:
         return render_to_response('register.html')
     else:
-        name = request.GET['name'].encode('utf-8')
-        pwd = request.GET['password'].encode('utf-8')
-        dic["name"] = name
-        dic["password"] = pwd
-        if dbUtil.select(dic):
+        name = request.GET['name']
+        pwd = request.GET['password']
+        if User.objects.filter(name=name, password=pwd).count() > 0:
             return render_to_response('MainBlog.html')
         else:
             return render_to_response('Error.html')
 
 
 def register(request):
-    request.encoding = 'utf-8'
-    dic = {}
-    name = request.GET['name'].encode('utf-8')
-    if name is not None or len(name) < 2:
+    if 'return' in request.POST:
         return render_to_response('dashboard.html')
     else:
-        name = request.GET['name']
-        pwd = request.GET['password']
-        dic["name"] = name
-        dic["password"] = pwd
-        if dbUtil.insert(dic):
+        name = request.POST.get("name")
+        pwd = request.POST.get("password")
+        if User(name=name, password=pwd, createdate=datetime.datetime.now(), updatedate=None, status=0).save():
             return render_to_response('dashboard.html')
         else:
             return render_to_response('Error.html')
 
+
+def change(request):
+    return render_to_response('ChangePwd.html')
+
+
+def account(request):
+    return render_to_response('Account.html')

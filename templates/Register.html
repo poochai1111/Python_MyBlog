@@ -12,7 +12,11 @@
 </head>
 <body>
 <div id="register">
-    <form action="/register" method="get">
+    <form action="/register/" method="post">
+        {% csrf_token %}
+        {% if error %}
+            <label>Please check your information</label>
+        {% endif %}
         <label class="registerTitle">Register Blog</label><br/>
         <div class="name">
             Name:<input type="text" name="name"><br/><br/>
@@ -24,8 +28,8 @@
            Input password again:<input type="password" name="secondPwd"><br/><br/>
         </div>
         <div class="functionButton">
-            <input type="submit" value="Submit" id="submit">
-            <input type="submit" value="Return" id="return">
+            <input type="submit" value="submit" name="submit" id="submit">
+            <input type="submit" value="return" name="return" id="return">
         </div>
     </form>
 </div>
