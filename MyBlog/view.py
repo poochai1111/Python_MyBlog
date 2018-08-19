@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response
 from MyBlog.models import User
+from django.views.decorators.csrf import csrf_exempt
 import datetime
 
 
@@ -19,14 +20,15 @@ def login(request):
         else:
             return render_to_response('Error.html')
 
-
+@csrf_exempt
 def register(request):
     if 'return' in request.POST:
         return render_to_response('dashboard.html')
     else:
         name = request.POST.get("name")
-        pwd = request.POST.get("password")
-        if User(name=name, password=pwd, createdate=datetime.datetime.now(), updatedate=None, status=0).save():
+        pwd = request.POST.get("firstPwd")
+        User(name=name, password=pwd, createdate=datetime.datetime.now(), updatedate=None, status=0).save()
+        if User.objects.filter(name=name, password=pwd).count() > 0:
             return render_to_response('dashboard.html')
         else:
             return render_to_response('Error.html')

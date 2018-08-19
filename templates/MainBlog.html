@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Main Blog</title>
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'bootstrap3/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <script src="{% static 'jquery3/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap3/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/blog.js' %}"></script>
+    <title>Blog</title>
 </head>
 <body>
-<p>Welcome to my blog</p>
+<div id="register">
+    <form action="" method="post">
+        {% csrf_token %}
+
+    </form>
+</div>
 </body>
 </html>
