@@ -11,10 +11,23 @@
     <title>Blog</title>
 </head>
 <body>
-<div id="register">
-    <form action="" method="post">
+<div id="create">
+    <form action="/create/" method="post">
         {% csrf_token %}
-
+        <div class="blogDiv">
+            <p>Welcome {{ name }} , login time: {{ time }}</p>
+            <label id="user" name="user" style="visibility: hidden">{{ name }}</label>
+            <div class="blogPanel">
+                <input type="text" name="blogTitle" id="blogTitle" /><br/>
+                <label id="blogTitleWarning">Please input your blog title</label><br/>
+                <textarea name="blogContent" id="blogBody"></textarea>
+                <label id="blogBodyWarning">Please input your blog body</label><br/>
+            <div class="buttonBlog">
+                <input type="submit" id="submit" name="submit" class="btn btn-default"/>
+                <input type="reset" id="reset" class="btn btn-default"/>
+            </div>
+            </div>
+        </div>
     </form>
 </div>
 </body>

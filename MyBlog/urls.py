@@ -26,5 +26,6 @@ urlpatterns = [
     path('register/', view.register),
     path('change/', view.change),
     path('account/', view.account),
+    path('create/', view.blog),
     path('test/', test),
 ]

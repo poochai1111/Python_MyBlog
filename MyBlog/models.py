@@ -19,3 +19,15 @@ class User(models.Model):
     class Meta:
         managed = False
         db_table = 'user'
+
+
+class Blog(models.Model):
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    title = models.CharField(db_column='Title', max_length=45)  # Field name made lowercase.
+    content = models.CharField(db_column='Content', max_length=45)  # Field name made lowercase.
+    createdate = models.DateTimeField(db_column='CreateDate')  # Field name made lowercase.
+    updatedate = models.DateTimeField(db_column='UpdateDate', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'blog'
