@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from MyBlog.models import Blog
+from MyBlog.models import MyBlog
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -15,7 +15,7 @@ def login_blog(request):
     if 'register' in request.GET:
         user_list = User.objects.all()
         return render(request, 'register.html', {"user_list": user_list})
-    else:
+    elif'submit' in request.GET:
         name = request.GET['name']
         pwd = request.GET['password']
         user = authenticate(request, username=name, password=pwd)
@@ -24,6 +24,8 @@ def login_blog(request):
             return render(request, 'MainBlog.html', {"name": name, "time": datetime.datetime.now()})
         else:
             return render(request, 'Error.html')
+    else:
+        return render(request, 'dashboard.html')
 
 
 @csrf_exempt
@@ -48,9 +50,9 @@ def create_blog(request):
     if 'submit' in request.POST:
         title = request.POST.get("blogTitle")
         content = request.POST.get("blogContent")
-        user_id = request.user.id
-        Blog(id=user_id, title=title, content=content, createdate=datetime.datetime.now(), updatedate=None).save()
-        if Blog.objects.filter(id=user_id).count() > 0:
+        user_name = request.user.username
+        MyBlog(name=user_name, title=title, content=content, createdate=datetime.datetime.now(), updatedate=None).save()
+        if MyBlog.objects.filter(name=user_name, title=title).count() > 0:
             return render(request, "success.html")
         else:
             return render(request, "Fail.html")

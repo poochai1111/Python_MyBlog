@@ -22,10 +22,10 @@ from TestModel.testdb import test
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', view.default),
-    path('login/', view.login_blog),
+    path('login/', view.login_blog, name="login"),
     path('register/', view.register_blog),
     path('change/', view.change_password),
-    path('account/', view.account_display),
+    path('account/', view.account_display, name="account"),
     path('create/', view.create_blog),
     path('test/', test),
 ]

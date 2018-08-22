@@ -8,13 +8,14 @@
 from django.db import models
 
 
-class Blog(models.Model):
-    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    title = models.CharField(db_column='Title', max_length=45)  # Field name made lowercase.
-    content = models.CharField(db_column='Content', max_length=45)  # Field name made lowercase.
-    createdate = models.DateTimeField(db_column='CreateDate')  # Field name made lowercase.
-    updatedate = models.DateTimeField(db_column='UpdateDate', blank=True, null=True)  # Field name made lowercase.
+class MyBlog(models.Model):
+    id = models.IntegerField(db_column='blog_id', primary_key=True, auto_created=True)  # Field name made lowercase.
+    name = models.CharField(db_column='blog_creater', max_length=45)
+    title = models.CharField(db_column='blog_title', max_length=45)
+    content = models.CharField(db_column='blog_content', max_length=4500)  # Field name made lowercase.
+    createdate = models.DateTimeField(db_column='blog_create_date')  # Field name made lowercase.
+    updatedate = models.DateTimeField(db_column='blog_update_date', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
-        db_table = 'blog'
+        db_table = 'my_blog'
