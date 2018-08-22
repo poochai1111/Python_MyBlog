@@ -12,10 +12,10 @@
 </head>
 <body>
 <div id="create">
+    <p style="text-align: center; font-size: 30px; color: blue">Welcome {{ name }} , login time: {{ time }}</p>
     <form action="/create/" method="post">
         {% csrf_token %}
         <div class="blogDiv">
-            <p>Welcome {{ name }} , login time: {{ time }}</p>
             <label id="user" name="user" style="visibility: hidden">{{ name }}</label>
             <div class="blogPanel">
                 <input type="text" name="blogTitle" id="blogTitle" /><br/>

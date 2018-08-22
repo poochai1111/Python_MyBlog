@@ -8,19 +8,6 @@
 from django.db import models
 
 
-class User(models.Model):
-    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    name = models.TextField(db_column='Name')  # Field name made lowercase.
-    password = models.TextField(db_column='Password')  # Field name made lowercase.
-    createdate = models.TextField(db_column='CreateDate')  # Field name made lowercase.
-    updatedate = models.TextField(db_column='UpdateDate', blank=True, null=True)  # Field name made lowercase.
-    status = models.IntegerField(db_column='Status')  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'user'
-
-
 class Blog(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
     title = models.CharField(db_column='Title', max_length=45)  # Field name made lowercase.
