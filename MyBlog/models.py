@@ -13,8 +13,8 @@ class MyBlog(models.Model):
     name = models.CharField(db_column='blog_creater', max_length=45)
     title = models.CharField(db_column='blog_title', max_length=45)
     content = models.CharField(db_column='blog_content', max_length=4500)  # Field name made lowercase.
-    createdate = models.DateTimeField(db_column='blog_create_date')  # Field name made lowercase.
-    updatedate = models.DateTimeField(db_column='blog_update_date', blank=True, null=True)  # Field name made lowercase.
+    create_date = models.DateTimeField(db_column='blog_create_date')  # Field name made lowercase.
+    update_date = models.DateTimeField(db_column='blog_update_date', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False

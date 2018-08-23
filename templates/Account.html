@@ -25,7 +25,29 @@
 <div id="account">
     <form action="" method="post">
         {% csrf_token %}
-        <label>Blog count : {{ blog_count }}</label>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Personal Info</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <th>user_name</th>
+                    <th>user_join_date</th>
+                    <th>user_email</th>
+                    <th>is_active</th>
+                    <th>is_superuser</th>
+                    {% for user in user_info %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.date_joined }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.is_active }}</td>
+                            <td>{{ user.is_superuser }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Blog detail</h3>
@@ -34,14 +56,12 @@
                 <table class="table">
                     <th>blog_title</th>
                     <th>blog_content</th>
-                    <th>Edit</th>
                     <th>Delete</th>
-                    {% for blob in blog_info %}
+                    {% for blog in blog_info %}
                         <tr>
-                            <td>{{ blob.title }}</td>
-                            <td>{{ blob.content }}</td>
-                            <td><input type="checkbox" name="Edit" id="{{ blog.id }}"/></td>
-                            <td><input type="checkbox" name="Delete" id="{{ blog.id }}"/></td>
+                            <td><a href="{% url 'edit'  blog_id=blog.id %}">{{ blog.title }}</a></td>
+                            <td>{{ blog.content }}</td>
+                            <td><input type="checkbox" name="delete" id="{{ blog.id }}"/></td>
                         </tr>
                     {% endfor %}
                 </table>

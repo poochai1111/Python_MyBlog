@@ -13,8 +13,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(db_column='blog_creater', max_length=45)),
                 ('title', models.CharField(db_column='blog_title', max_length=45)),
                 ('content', models.CharField(db_column='blog_content', max_length=4500)),
-                ('createdate', models.DateTimeField(db_column='blog_create_date')),
-                ('updatedate', models.DateTimeField(blank=True, db_column='blog_update_date', null=True)),
+                ('create_date', models.DateTimeField(db_column='blog_create_date')),
+                ('update_date', models.DateTimeField(blank=True, db_column='blog_update_date', null=True)),
             ],
             options={
                 'db_table': 'my_blog',

@@ -22,7 +22,8 @@ def login_blog(request):
         user = authenticate(request, username=name, password=pwd)
         if user is not None:
             login(request, user)
-            return render(request, 'MainBlog.html', {"name": name, "time": datetime.datetime.now()})
+            title = "Welcome "+name+", Login time:"+datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+            return render(request, 'MainBlog.html', {"welcome": title})
         else:
             return render(request, 'Error.html')
     else:
@@ -51,12 +52,28 @@ def create_blog(request):
     if 'submit' in request.POST:
         title = request.POST.get("blogTitle")
         content = request.POST.get("blogContent")
+        blog_id = int(request.POST.get("blog_id"))
         user_name = request.user.username
-        MyBlog(name=user_name, title=title, content=content, createdate=datetime.datetime.now(), updatedate=None).save()
-        if MyBlog.objects.filter(name=user_name, title=title).count() > 0:
-            return render(request, "success.html")
+        if blog_id is not None:
+            MyBlog.objects.filter(id=blog_id).update(title=title, content=content)
+            if MyBlog.objects.filter(id=blog_id).values("update_date") is not None:
+                return render(request, "success.html", {"title": "Update blog success"})
+            else:
+                return render(request, "Fail.html", {"title": "Update Blog Failed!!!"})
         else:
-            return render(request, "Fail.html")
+            MyBlog(name=user_name, title=title, content=content, createdate=datetime.datetime.now(),
+                   updatedate=None).save()
+            if MyBlog.objects.filter(name=user_name, title=title).count() > 0:
+                return render(request, "success.html", {"title": "Create blog success"})
+            else:
+                return render(request, "Fail.html", {"title": "Create Blog Failed!!!"})
+
+
+def edit_blog(request, blog_id):
+    user_name = request.user.username
+    blog = list(MyBlog.objects.filter(id=blog_id).values())
+    title = "Welcome " + user_name + ", Update blog time:" + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    return render(request, 'MainBlog.html', {"blog_info": blog, "welcome": title})
 
 
 def change_password(request):
@@ -66,14 +83,13 @@ def change_password(request):
 def account_display(request):
     user_name = request.user.username
     blog = list(MyBlog.objects.filter(name=user_name))
+    user = list(User.objects.filter(username=user_name))
     paginator = Paginator(blog, 10)
     page = request.GET.get('page')
     try:
         blog = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
         blog = paginator.page(1)
     except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
         blog = paginator.page(paginator.num_pages)
-    return render(request, 'Account.html', {"blog_info": blog, "blog_count": len(blog)})
+    return render(request, 'Account.html', {"blog_info": blog, "blog_count": len(blog), "user_info": user})
