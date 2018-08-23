@@ -11,10 +11,73 @@
     <title>Account</title>
 </head>
 <body>
-<div id="register">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'login' %}">My Blog</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-out"></span>Login Out</a></li>
+        </ul>
+    </div>
+</nav>
+<div id="account">
     <form action="" method="post">
         {% csrf_token %}
-        <label class="registerTitle">User Account</label><br/>
+        <label>Blog count : {{ blog_count }}</label>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Blog detail</h3>
+            </div>
+            {% if blog_count > 0 %}
+                <table class="table">
+                    <th>blog_title</th>
+                    <th>blog_content</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% for blob in blog_info %}
+                        <tr>
+                            <td>{{ blob.title }}</td>
+                            <td>{{ blob.content }}</td>
+                            <td><input type="checkbox" name="Edit" id="{{ blog.id }}"/></td>
+                            <td><input type="checkbox" name="Delete" id="{{ blog.id }}"/></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <table class="table">
+                    <th>blog_title</th>
+                    <th>blog_content</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <tr>
+                        <td>No Blog</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            {% endif %}
+        </div>
+        <div class="pagination">
+            <span class="pager">
+                {% if blog_info.has_previous %}
+                    <a href="?page={{ blog_info.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ blog_info.number }} of {{ blog_info.paginator.num_pages }}.
+                </span>
+
+                {% if blog_info.has_next %}
+                    <a href="?page={{ blog_info.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
+        <div id="buttonGroup">
+            <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-default"/>
+            <input type="reset" name="reset" id="reset" value="Reset" class="btn btn-default"/>
+        </div>
     </form>
 </div>
 </body>

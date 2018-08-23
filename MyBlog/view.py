@@ -3,6 +3,7 @@ from MyBlog.models import MyBlog
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import datetime
 
 
@@ -15,7 +16,7 @@ def login_blog(request):
     if 'register' in request.GET:
         user_list = User.objects.all()
         return render(request, 'register.html', {"user_list": user_list})
-    elif'submit' in request.GET:
+    elif 'submit' in request.GET:
         name = request.GET['name']
         pwd = request.GET['password']
         user = authenticate(request, username=name, password=pwd)
@@ -63,4 +64,16 @@ def change_password(request):
 
 
 def account_display(request):
-    return render(request, 'Account.html')
+    user_name = request.user.username
+    blog = list(MyBlog.objects.filter(name=user_name))
+    paginator = Paginator(blog, 10)
+    page = request.GET.get('page')
+    try:
+        blog = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        blog = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        blog = paginator.page(paginator.num_pages)
+    return render(request, 'Account.html', {"blog_info": blog, "blog_count": len(blog)})
