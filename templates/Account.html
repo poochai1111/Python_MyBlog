@@ -61,7 +61,7 @@
                         <tr>
                             <td><a href="{% url 'edit'  blog_id=blog.id %}">{{ blog.title }}</a></td>
                             <td>{{ blog.content }}</td>
-                            <td><input type="checkbox" name="delete" id="{{ blog.id }}"/></td>
+                            <td><input type="checkbox" class="blog_id" name="delete" value="{{ blog.id }}"/></td>
                         </tr>
                     {% endfor %}
                 </table>

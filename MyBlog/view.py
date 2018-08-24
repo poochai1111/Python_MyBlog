@@ -96,3 +96,8 @@ def account_display(request):
     except EmptyPage:
         blog = paginator.page(paginator.num_pages)
     return render(request, 'Account.html', {"blog_info": blog, "blog_count": len(blog), "user_info": user})
+
+
+def blog_delete(request, blog_id):
+    MyBlog.objects.filter(id=blog_id).delete()
+    account_display(request)
