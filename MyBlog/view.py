@@ -52,7 +52,10 @@ def create_blog(request):
     if 'submit' in request.POST:
         title = request.POST.get("blogTitle")
         content = request.POST.get("blogContent")
-        blog_id = int(request.POST.get("blog_id"))
+        if request.POST.get("blog_id") == 'undefined':
+            blog_id = None
+        else:
+            blog_id = int(request.POST.get("blog_id"))
         user_name = request.user.username
         if blog_id is not None:
             MyBlog.objects.filter(id=blog_id).update(title=title, content=content)
@@ -61,8 +64,8 @@ def create_blog(request):
             else:
                 return render(request, "Fail.html", {"title": "Update Blog Failed!!!"})
         else:
-            MyBlog(name=user_name, title=title, content=content, createdate=datetime.datetime.now(),
-                   updatedate=None).save()
+            MyBlog(name=user_name, title=title, content=content, create_date=datetime.datetime.now(),
+                   update_date=None).save()
             if MyBlog.objects.filter(name=user_name, title=title).count() > 0:
                 return render(request, "success.html", {"title": "Create blog success"})
             else:
