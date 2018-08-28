@@ -22,7 +22,7 @@ def login_blog(request):
         user = authenticate(request, username=name, password=pwd)
         if user is not None:
             login(request, user)
-            title = "Welcome "+name+", Login time:"+datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+            title = "Welcome " + name + ", Login time:" + datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
             return render(request, 'MainBlog.html', {"welcome": title})
         else:
             return render(request, 'Error.html')
@@ -70,6 +70,9 @@ def create_blog(request):
                 return render(request, "success.html", {"title": "Create blog success"})
             else:
                 return render(request, "Fail.html", {"title": "Create Blog Failed!!!"})
+    else:
+        title = "Welcome " + request.user.username + ", Login time:" + datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+        return render(request, "MainBlog.html", {"welcome": title})
 
 
 def edit_blog(request, blog_id):
@@ -98,6 +101,13 @@ def account_display(request):
     return render(request, 'Account.html', {"blog_info": blog, "blog_count": len(blog), "user_info": user})
 
 
-def blog_delete(request, blog_id):
-    MyBlog.objects.filter(id=blog_id).delete()
+@csrf_exempt
+def blog_delete(request):
+    blog_id_list = request.POST["blog_id"]
+    if "," in blog_id_list:
+        array = blog_id_list.split(",")
+        for blog_id in array:
+            MyBlog.objects.filter(id=blog_id).delete()
+    else:
+        MyBlog.objects.filter(id=blog_id_list).delete()
     account_display(request)

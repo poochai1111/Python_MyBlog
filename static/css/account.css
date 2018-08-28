@@ -15,8 +15,13 @@ body {
 #buttonGroup{
     margin-left: 40%;
     margin-top: -1%;
+    margin-bottom: 15px;
 }
 
 #reset{
     margin-left: 15px;
+}
+
+.pagination{
+    margin-left: 20px;
 }

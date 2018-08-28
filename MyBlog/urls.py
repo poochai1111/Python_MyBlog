@@ -26,8 +26,8 @@ urlpatterns = [
     path('register/', view.register_blog),
     path('change/', view.change_password),
     path('account/', view.account_display, name="account"),
-    path('create/', view.create_blog),
-    path('delete/(?<blog_id>$)', view.blog_delete, name="delete"),
+    path('create/', view.create_blog, name="blog"),
+    path('delete/', view.blog_delete, name="delete"),
     path('edit/<int:blog_id>', view.edit_blog, name="edit"),
     path('test/', test),
 ]

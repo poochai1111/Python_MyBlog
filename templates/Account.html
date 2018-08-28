@@ -18,10 +18,12 @@
             <a class="navbar-brand" href="{% url 'login' %}">My Blog</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'blog' %}"><span class="glyphicon glyphicon-backward"></span>Back</a></li>
             <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-out"></span>Login Out</a></li>
         </ul>
     </div>
 </nav>
+{% include 'confirm.html' %}
 <div id="account">
     <form action="" method="post">
         {% csrf_token %}
@@ -65,6 +67,25 @@
                         </tr>
                     {% endfor %}
                 </table>
+                <div class="pagination">
+                    <span class="pager">
+                        {% if blog_info.has_previous %}
+                            <a href="?page={{ blog_info.previous_page_number }}">Previous</a>
+                        {% endif %}
+
+                    <span class="current">
+                        Page {{ blog_info.number }} of {{ blog_info.paginator.num_pages }}.
+                    </span>
+
+                        {% if blog_info.has_next %}
+                            <a href="?page={{ blog_info.next_page_number }}">Next</a>
+                        {% endif %}
+                    </span>
+                </div>
+                <div id="buttonGroup">
+                    <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-default"/>
+                    <input type="reset" name="reset" id="reset" value="Reset" class="btn btn-default"/>
+                </div>
             {% else %}
                 <table class="table">
                     <th>blog_title</th>
@@ -79,25 +100,6 @@
                     </tr>
                 </table>
             {% endif %}
-        </div>
-        <div class="pagination">
-            <span class="pager">
-                {% if blog_info.has_previous %}
-                    <a href="?page={{ blog_info.previous_page_number }}">Previous</a>
-                {% endif %}
-
-                <span class="current">
-                    Page {{ blog_info.number }} of {{ blog_info.paginator.num_pages }}.
-                </span>
-
-                {% if blog_info.has_next %}
-                    <a href="?page={{ blog_info.next_page_number }}">Next</a>
-                {% endif %}
-            </span>
-        </div>
-        <div id="buttonGroup">
-            <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-default"/>
-            <input type="reset" name="reset" id="reset" value="Reset" class="btn btn-default"/>
         </div>
     </form>
 </div>

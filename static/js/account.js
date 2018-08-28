@@ -1,30 +1,33 @@
 $(document).ready(function () {
-    $("#submit").click(function () {
-        alert("IN")
-        var vals = [];
-        $('input:checkbox:checked').each(function () {
-            vals.push($(this).val());
-        });
-        var str_blog_id = ""
-        alert(vals)
-        for (var i = 0; i < vals.length; i++) {
-            if (str_blog_id.length == 0) {
-                str_blog_id = vals[i]
-            } else {
-                str_blog_id = str_blog_id + "," + vals[i]
-            }
+    $("#submit").click(function (event) {
+        var blog_id = ""
+        if ($('input:checkbox:checked').length > 0) {
+            $('input:checkbox:checked').each(function () {
+                if (blog_id.length == 0) {
+                    blog_id = $(this).val()
+                } else {
+                    blog_id = blog_id + "," + $(this).val()
+                }
+            });
+            $('#myModal').find('.modal-title').text('Confirm Dialog');
+            $('#myModal').find('.modal-body').text('Are you sure you want to delete blog id [' + blog_id + ']?');
+            $('#myModal').modal('show')
+            $('#ok').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/delete/",
+                    data: {"blog_id": blog_id},
+                    success: function () {
+                        window.reload()
+                    }
+                });
+            })
+            event.preventDefault();
         }
-        alert(str_blog_id)
-        $.ajax({
-            type: "POST",
-            url: "/delete/",
-            data: {blog_id: str_blog_id},
-            success: function () {
-                alert("OK")
-            }
-        })
+        else {
+            alert("No record to be chosen")
+        }
     })
-
     $("#reset").click(function () {
        $('.blog_id input').prop('checked', false);
     })
