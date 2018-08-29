@@ -17,7 +17,7 @@ $(document).ready(function () {
                     type: "POST",
                     url: "/delete/",
                     data: {"blog_id": blog_id},
-                    success: function (data) {
+                    success: function () {
                         $('#myModal').modal('hide')
                         window.location.reload();
                     }

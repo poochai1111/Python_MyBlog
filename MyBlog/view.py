@@ -10,7 +10,7 @@ from django.core import serializers
 
 
 def default(request):
-    return render(request, 'dashboard.html')
+    return render(request, 'index.html')
 
 
 def login_blog(request):
