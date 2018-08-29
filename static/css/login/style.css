@@ -6,7 +6,8 @@ body {
 }
 
 .page-container {
-    margin: 120px auto 0 auto;
+    margin: 10% auto 0 auto;
+    width: 360px;
 }
 
 h1 {
