@@ -137,6 +137,7 @@ button:active {
 }
 
 .error span {
+    color: red;
     display: inline-block;
     margin-left: 2px;
     font-size: 40px;
@@ -173,6 +174,13 @@ button:active {
 .connect a.twitter { background: url('../../image/login/twitter.png') center center no-repeat; }
 
 .connect a:hover { background-position: center bottom; }
+
+.passwordForgot{
+    margin-left: 55%;
+}
+.registerHint{
+    margin-top: 10px;
+}
 
 
 
