@@ -4,7 +4,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
 import datetime
+from django.core import serializers
 
 
 def default(request):
@@ -110,4 +112,6 @@ def blog_delete(request):
             MyBlog.objects.filter(id=blog_id).delete()
     else:
         MyBlog.objects.filter(id=blog_id_list).delete()
-    account_display(request)
+    user_name = request.user.username
+    blog = serializers.serialize('json', MyBlog.objects.filter(name=user_name))
+    return JsonResponse(blog, content_type="application/json", safe=False)

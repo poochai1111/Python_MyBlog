@@ -17,8 +17,9 @@ $(document).ready(function () {
                     type: "POST",
                     url: "/delete/",
                     data: {"blog_id": blog_id},
-                    success: function () {
-                        window.reload()
+                    success: function (data) {
+                        $('#myModal').modal('hide')
+                        window.location.reload();
                     }
                 });
             })
