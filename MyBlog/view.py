@@ -73,7 +73,8 @@ def create_blog(request):
             else:
                 return render(request, "Fail.html", {"title": "Create Blog Failed!!!"})
     else:
-        title = "Welcome " + request.user.username + ", Login time:" + datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+        title = "Welcome " + request.user.username + ", Login time:" + datetime.datetime.now().strftime(
+            '%Y/%m/%d %H:%M:%S')
         return render(request, "MainBlog.html", {"welcome": title})
 
 
@@ -115,3 +116,7 @@ def blog_delete(request):
     user_name = request.user.username
     blog = serializers.serialize('json', MyBlog.objects.filter(name=user_name))
     return JsonResponse(blog, content_type="application/json", safe=False)
+
+
+def new_register(request):
+    return render(request, 'new_register.html')

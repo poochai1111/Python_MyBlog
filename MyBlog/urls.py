@@ -21,7 +21,7 @@ from TestModel.testdb import test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', view.default),
+    path('', view.default, name="new_login"),
     path('login/', view.login_blog, name="login"),
     path('register/', view.register_blog),
     path('change/', view.change_password),
@@ -30,4 +30,5 @@ urlpatterns = [
     path('delete/', view.blog_delete, name="delete"),
     path('edit/<int:blog_id>', view.edit_blog, name="edit"),
     path('test/', test),
+    path('new_register/', view.new_register, name="new_register"),
 ]
