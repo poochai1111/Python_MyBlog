@@ -120,3 +120,7 @@ def blog_delete(request):
 
 def new_register(request):
     return render(request, 'new_register.html')
+
+
+def new_password(request):
+    return render(request, 'ChangePwd.html')

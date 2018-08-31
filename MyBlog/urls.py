@@ -31,4 +31,5 @@ urlpatterns = [
     path('edit/<int:blog_id>', view.edit_blog, name="edit"),
     path('test/', test),
     path('new_register/', view.new_register, name="new_register"),
+    path('change/', view.new_register, name="new_password"),
 ]
