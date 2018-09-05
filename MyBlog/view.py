@@ -7,6 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 import datetime
 from django.core import serializers
+from django.core.mail import send_mail
 
 
 def default(request):
@@ -124,3 +125,21 @@ def new_register(request):
 
 def new_password(request):
     return render(request, 'ChangePwd.html')
+
+
+@csrf_exempt
+def change_password(request):
+    mail = request.POST.get("email")
+    subject = 'test'
+    body = 'test'
+    sender = '2574064961@qq.com'
+    try:
+        send_mail(
+            subject,
+            body,
+            sender,
+            [mail],
+        )
+    except OSError:
+        print(OSError)
+    return render(request, 'index.html')
